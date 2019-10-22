@@ -33,6 +33,4 @@
     - docker-compose
     - ansible==2.7.10
 - name: Run installer
-  command: "/srv/awx/virtualenv/bin/ansible-playbook -i inventory install.yml"
-  args:
-    chdir: /srv/awx/installer
+  raw: "cd /srv/awx/installer; source /srv/awx/virtualenv/bin/activate; ansible-playbook -i inventory install.yml"
