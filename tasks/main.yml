@@ -1,8 +1,15 @@
 ---
 - name: install git
   package:
-    name: git
+    name: "{{ item }}"
     state: present
+  loop:
+    - git
+    - python-setuptools
+    - python3-setuptools
+    - python3-wheel
+    - python3-pip
+
 
 - name: check out master branch
   git:
@@ -16,9 +23,9 @@
     virtualenv: /srv/aws/virtualenv
     virtualenv_command: /usr/bin/python3 -m venv
 
-- name: Upgrade pip to the last version
+- name: Install ansible
   pip:
-    name: pip
+    name: ansible==2.7.10
     virtualenv: /srv/aws/virtualenv
     virtualenv_command: /usr/bin/python3 -m venv
 
