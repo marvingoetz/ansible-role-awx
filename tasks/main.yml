@@ -5,6 +5,7 @@
     state: present
   loop:
     - git
+    - libselinux-python
     - python-setuptools
     - python3-setuptools
     - python3-wheel
@@ -32,5 +33,5 @@
     - docker
     - docker-compose
     - ansible==2.7.10
-- name: Run installer
-  raw: "cd /srv/awx/installer; source /srv/awx/virtualenv/bin/activate; ansible-playbook -i inventory install.yml"
+      #- name: Run installer
+      #raw: "cd /srv/awx/installer; source /srv/awx/virtualenv/bin/activate; ansible-playbook -i inventory install.yml"
