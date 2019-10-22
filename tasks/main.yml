@@ -20,14 +20,19 @@
 - name: Upgrade pip to the last version
   pip:
     name: pip
-    virtualenv: /srv/aws/virtualenv
+    virtualenv: /srv/awx/virtualenv
     virtualenv_command: /usr/bin/python3 -m venv
 
-- name: Install ansible
+- name: Install python modules
   pip:
-    name: ansible==2.7.10
-    virtualenv: /srv/aws/virtualenv
+    name: "{{ item }}"
+    virtualenv: /srv/awx/virtualenv
     virtualenv_command: /usr/bin/python3 -m venv
-
-    #install ansible
-    #ansible-playbook -i inventory install.yml
+  loop:
+    - docker
+    - docker-compose
+    - ansible==2.7.10
+- name: Run installer
+  command: "/srv/awx/virtualenv/bin/ansible-playbook -i inventory install.yml"
+  args:
+    chdir: /srv/awx/installer
