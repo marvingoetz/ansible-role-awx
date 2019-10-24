@@ -7,9 +7,7 @@
     - git
     - libselinux-python
     - python-setuptools
-    - python3-setuptools
-    - python3-wheel
-    - python3-pip
+    - python-pip
 
 
 - name: check out master branch
@@ -21,17 +19,14 @@
 - name: Upgrade pip to the last version
   pip:
     name: pip
-    virtualenv: /srv/awx/virtualenv
-    virtualenv_command: /usr/bin/python3 -m venv
 
 - name: Install python modules
   pip:
     name: "{{ item }}"
-    virtualenv: /srv/awx/virtualenv
-    virtualenv_command: /usr/bin/python3 -m venv
   loop:
     - docker
     - docker-compose
     - ansible==2.7.10
-      #- name: Run installer
-      #raw: "cd /srv/awx/installer; source /srv/awx/virtualenv/bin/activate; ansible-playbook -i inventory install.yml"
+
+- name: Run installer
+  raw: "cd /srv/awx/installer; ansible-playbook -i inventory install.yml"
