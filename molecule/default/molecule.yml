@@ -8,7 +8,7 @@ lint:
     config-file: molecule/default/yamllint.yml
 platforms:
   - name: ansible-role-test
-    image: "geerlingguy/docker-debian9-ansible"
+    image: "geerlingguy/docker-centos7-ansible"
     command: ${MOLECULE_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
